@@ -21,7 +21,7 @@
 {-# LANGUAGE NoMonomorphismRestriction #-}
 {-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE MultiWayIf #-}
-module ShellCheck.Parser (parseScript, runTests) where
+module ShellCheck.Parser (parseScript) where
 
 import ShellCheck.AST
 import ShellCheck.ASTLib
@@ -47,8 +47,6 @@ import Text.Parsec.Pos
 import qualified Control.Monad.Reader as Mr
 import qualified Control.Monad.State as Ms
 import qualified Data.Map as Map
-
-import Test.QuickCheck.All (quickCheckAll)
 
 type SCBase m = Mr.ReaderT (Environment m) (Ms.StateT SystemState m)
 type SCParser m v = ParsecT String UserState (SCBase m) v
@@ -3380,5 +3378,4 @@ tryWithErrors parser = do
         return (result, endPos, endInput, endState)
 
 return []
-runTests = $quickCheckAll
 

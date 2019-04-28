@@ -19,7 +19,7 @@
 -}
 {-# LANGUAGE TemplateHaskell #-}
 {-# LANGUAGE FlexibleContexts #-}
-module ShellCheck.Checks.ShellSupport (checker , ShellCheck.Checks.ShellSupport.runTests) where
+module ShellCheck.Checks.ShellSupport (checker) where
 
 import ShellCheck.AST
 import ShellCheck.ASTLib
@@ -34,8 +34,6 @@ import Data.List
 import Data.Maybe
 import qualified Data.Map as Map
 import qualified Data.Set as Set
-import Test.QuickCheck.All (forAllProperties)
-import Test.QuickCheck.Test (quickCheckWithResult, stdArgs, maxSuccess)
 
 data ForShell = ForShell [Shell] (Token -> Analysis)
 
@@ -530,4 +528,3 @@ checkPS1Assignments = ForShell [Bash] f
 
 
 return []
-runTests =  $( [| $(forAllProperties) (quickCheckWithResult (stdArgs { maxSuccess = 1 }) ) |])

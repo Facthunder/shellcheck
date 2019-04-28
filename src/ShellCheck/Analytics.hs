@@ -19,7 +19,7 @@
 -}
 {-# LANGUAGE TemplateHaskell #-}
 {-# LANGUAGE FlexibleContexts #-}
-module ShellCheck.Analytics (runAnalytics, ShellCheck.Analytics.runTests) where
+module ShellCheck.Analytics (runAnalytics) where
 
 import ShellCheck.AST
 import ShellCheck.ASTLib
@@ -43,8 +43,6 @@ import Data.Maybe
 import Data.Ord
 import Debug.Trace
 import qualified Data.Map.Strict as Map
-import Test.QuickCheck.All (forAllProperties)
-import Test.QuickCheck.Test (quickCheckWithResult, stdArgs, maxSuccess)
 
 -- Checks that are run on the AST root
 treeChecks :: [Parameters -> Token -> [TokenComment]]
@@ -3256,4 +3254,3 @@ checkDefaultCase _ t =
         return $ pseudoGlobIsSuperSetof pg [PGMany]
 
 return []
-runTests =  $( [| $(forAllProperties) (quickCheckWithResult (stdArgs { maxSuccess = 1 }) ) |])

@@ -40,9 +40,6 @@ import Data.Maybe
 import Data.Semigroup
 import qualified Data.Map as Map
 
-import Test.QuickCheck.All (forAllProperties)
-import Test.QuickCheck.Test (maxSuccess, quickCheckWithResult, stdArgs)
-
 type Analysis = AnalyzerM ()
 type AnalyzerM a = RWS Parameters [TokenComment] Cache a
 nullCheck = const $ return ()
@@ -943,4 +940,3 @@ getOpts flagTokenizer string cmd = process flags
 supportsArrays shell = shell == Bash || shell == Ksh
 
 return []
-runTests =  $( [| $(forAllProperties) (quickCheckWithResult (stdArgs { maxSuccess = 1 }) ) |])

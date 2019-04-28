@@ -21,7 +21,7 @@
 {-# LANGUAGE FlexibleContexts #-}
 
 -- This module contains checks that examine specific commands by name.
-module ShellCheck.Checks.Commands (checker , ShellCheck.Checks.Commands.runTests) where
+module ShellCheck.Checks.Commands (checker) where
 
 import ShellCheck.AST
 import ShellCheck.ASTLib
@@ -37,8 +37,6 @@ import Data.Char
 import Data.List
 import Data.Maybe
 import qualified Data.Map.Strict as Map
-import Test.QuickCheck.All (forAllProperties)
-import Test.QuickCheck.Test (quickCheckWithResult, stdArgs, maxSuccess)
 
 data CommandName = Exactly String | Basename String
     deriving (Eq, Ord)
@@ -1043,4 +1041,3 @@ checkSourceArgs = CommandCheck (Exactly ".") f
             _ -> return ()
 
 return []
-runTests =  $( [| $(forAllProperties) (quickCheckWithResult (stdArgs { maxSuccess = 1 }) ) |])

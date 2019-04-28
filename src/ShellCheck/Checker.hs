@@ -18,7 +18,7 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 -}
 {-# LANGUAGE TemplateHaskell #-}
-module ShellCheck.Checker (checkScript, ShellCheck.Checker.runTests) where
+module ShellCheck.Checker (checkScript) where
 
 import ShellCheck.Interface
 import ShellCheck.Parser
@@ -34,8 +34,6 @@ import qualified Data.Map as Map
 import qualified System.IO
 import Prelude hiding (readFile)
 import Control.Monad
-
-import Test.QuickCheck.All
 
 tokenToPosition startMap t = fromMaybe fail $ do
     span <- Map.lookup (tcId t) startMap
@@ -360,4 +358,3 @@ prop_sourcePathRedirectsDirective = result == [2086]
     }
 
 return []
-runTests = $quickCheckAll

@@ -49,7 +49,7 @@ library
       build-depends:
         semigroups
     build-depends:
-      aeson,
+      aeson <= 1.2.3.0,
       array,
       -- GHC 7.6.3 (base 4.6.0.1) is buggy (#1131, #1119) in optimized mode.
       -- Just disable that version entirely to fail fast.
@@ -62,7 +62,6 @@ library
       filepath,
       parsec,
       regex-tdfa,
-      QuickCheck >= 2.7.4,
       -- When cabal supports it, move this to setup-depends:
       process
     exposed-modules:
@@ -87,42 +86,3 @@ library
       ShellCheck.Regex
     other-modules:
       Paths_ShellCheck
-
-executable shellcheck
-    if impl(ghc < 8.0)
-      build-depends:
-        semigroups
-    build-depends:
-      aeson,
-      array,
-      base >= 4 && < 5,
-      bytestring,
-      containers,
-      deepseq >= 1.4.0.0,
-      directory >= 1.2.3.0,
-      mtl >= 2.2.1,
-      filepath,
-      parsec >= 3.0,
-      QuickCheck >= 2.7.4,
-      regex-tdfa,
-      ShellCheck
-    main-is: shellcheck.hs
-
-test-suite test-shellcheck
-    type: exitcode-stdio-1.0
-    build-depends:
-      aeson,
-      array,
-      base >= 4 && < 5,
-      bytestring,
-      containers,
-      deepseq >= 1.4.0.0,
-      directory >= 1.2.3.0,
-      mtl >= 2.2.1,
-      filepath,
-      parsec,
-      QuickCheck >= 2.7.4,
-      regex-tdfa,
-      ShellCheck
-    main-is: test/shellcheck.hs
-
